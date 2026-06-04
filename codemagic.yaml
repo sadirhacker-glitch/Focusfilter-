@@ -6,15 +6,10 @@ workflows:
       java: 17
 
     scripts:
-      - name: Install Gradle
-        script: |
-          wget https://services.gradle.org/distributions/gradle-8.7-bin.zip
-          unzip -q gradle-8.7-bin.zip
-          export PATH=$PWD/gradle-8.7/bin:$PATH
-
       - name: Build APK
         script: |
-          gradle assembleDebug
+          chmod +x gradlew
+          ./gradlew assembleDebug
 
     artifacts:
       - app/build/outputs/**/*.apk
