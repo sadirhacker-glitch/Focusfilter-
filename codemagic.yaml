@@ -8,10 +8,14 @@ workflows:
         script: |
           tar -xzf FocusFilter.tar.gz
           ls -la FocusFilter/
+      - name: Generate Gradle Wrapper
+        script: |
+          cd FocusFilter
+          gradle wrapper
+          chmod +x gradlew
       - name: Build APK
         script: |
           cd FocusFilter
-          chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug --stacktrace
     artifacts:
       - FocusFilter/app/build/outputs/**/*.apk
