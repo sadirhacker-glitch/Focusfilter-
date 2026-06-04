@@ -4,16 +4,14 @@ workflows:
     environment:
       java: 17
     scripts:
-      - name: List files (debugging)
+      - name: Unpack FocusFilter
         script: |
-          pwd
-          ls -la
-          find . -name "settings.gradle" -type f
+          tar -xzf FocusFilter.tar.gz
+          ls -la FocusFilter/
       - name: Build APK
         script: |
-          # Navigate to the folder containing your build files
-          cd FocusFilter 2>/dev/null || cd app 2>/dev/null || cd ..
-          chmod +x gradlew 2>/dev/null || true
-          ./gradlew assembleDebug --stacktrace
+          cd FocusFilter
+          chmod +x gradlew
+          ./gradlew assembleDebug
     artifacts:
-      - app/build/outputs/**/*.apk
+      - FocusFilter/app/build/outputs/**/*.apk
